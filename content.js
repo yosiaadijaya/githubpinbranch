@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var option = {}
+    var option = {};
     chrome.storage.sync.get({
         parsed: {
             exact: ['develop', 'staging', 'master'],
@@ -15,10 +15,11 @@
         option.hideUnpinned = items.hideUnpinned;
     });
 
+    var lastToken;
     chrome.storage.onChanged.addListener(function (changes, namespace) {
         for (var key in changes) {
             option[key] = changes[key].newValue;
-            if (key == 'hideUnpinned') toggleUnpinned();
+            if (key == 'hideUnpinned') toggleUnpinned(lastToken);
         }
     });
 
@@ -45,8 +46,9 @@
         }
         return src;
     };
-    const toggleUnpinned = function () {
-        var unpinned = document.querySelectorAll('.select-menu a.select-menu-item:not([pinned="' + option.lastUpdate + '"])')
+    const toggleUnpinned = function (token) {
+        if (!token) token = option.lastUpdate
+        var unpinned = document.querySelectorAll('.select-menu a.select-menu-item:not([pinned="' + token + '"])')
         if (option.hideUnpinned) {
             for (var i = 0; i < unpinned.length; i++) {
                 unpinned[i].classList.add('d-none');
@@ -68,6 +70,7 @@
     }
     addEventForChild(document.querySelector('.application-main'), 'click', '.select-menu .branch, .select-menu [data-hotkey="w"]', function (_this) {
         if (_this.getAttribute('lastcheck') == option.lastUpdate) return
+        lastToken = option.lastUpdate;
 
         var param = window.location.href;
         var index = nthIndex(param, '/', 7);
