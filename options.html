@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        tr {
+            border-bottom: 1px solid gray;
+            vertical-align: top;
+        }
+        td {
+            padding: 10px 0px;
+        }
+        input[type=checkbox] {
+            transform: scale(1.2);
+        }
+        .myinput {
+            outline: none;
+            width: 250px;
+            padding-left: 5px;
+            overflow: hidden;
+        }
+        .fullcenterbox {
+            width: 100%;
+            text-align: center;
+        }
+        #wrapper {
+            width: 300px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        #title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+        #status {
+            margin: 20px;
+            height: 15px;
+            color: green;
+        }
+        #save {
+            width:100px;
+            height: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div>
+            <div id="title">Github Pin Branch</div>
+            <table>
+                <tr>
+                    <td><label for="exact">exact</label></td>
+                    <td>:</td><td><div class="myinput" name="" id="exact" contenteditable="true"></div></td>
+                </tr>                
+                <tr>
+                    <td><label for="prefix">prefix</label></td>
+                    <td>:</td><td><div class="myinput" name="" id="prefix" contenteditable="true"></div></td>
+                </tr>
+            </table>
+            <div>
+                <input type="checkbox" name="" id="hide-unpinned">
+                <label for="hide-unpinned"> Hide unpinned branch</label> 
+            </div>
+        </div>
+
+        <div class="fullcenterbox">
+            <div id="status"></div>
+            <button id="save" title="shortcut: ctrl+s">Save</button>
+        </div>
+    </div>
+
+</body>
+<script src="options.js"></script>
+
+</html>
